@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clientes")
+@CrossOrigin(origins = "*")
 public class ClienteController {
 
     @Autowired
@@ -26,7 +27,7 @@ public class ClienteController {
     @PostMapping("/criarCliente")
         public ResponseEntity<Cliente> criarCliente(@RequestBody Cliente cliente){
             Cliente novoCliente = clienteService.criarCliente(cliente);
-            logger.info("Recebido JSON: Loja={}", novoCliente.getLoja());
+            logger.info("Recebido JSON: Código={}", novoCliente.getCodigo());
             return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
         }
 
@@ -36,7 +37,7 @@ public class ClienteController {
             return clienteService.listarClientes();
         }
 
-    // http://localhost:8080/api/clientes/deletarUsuario/{codigo} => DELETE
+    // http://localhost:8080/api/clientes/deletarCliente/{codigo} => DELETE
     @DeleteMapping("/deletarCliente/{codigo}")
         public ResponseEntity<String> deletarCliente(@PathVariable Long codigo){
             boolean removido = clienteService.deletarCliente(codigo);
@@ -47,7 +48,7 @@ public class ClienteController {
             }
         }
 
-    // http://localhost:8080/api/clientes/atualizarUsuario/{codigo} => PUT
+    // http://localhost:8080/api/clientes/atualizarCliente/{codigo} => PUT
     @PutMapping("atualizarCliente/{codigo}")
     public ResponseEntity<String> atualizarCliente(@PathVariable Long codigo, @RequestBody Cliente clienteAtualizado){
         boolean atualizado = clienteService.atualizarCliente(codigo, clienteAtualizado);
@@ -58,7 +59,7 @@ public class ClienteController {
         }
     } 
 
-    // http://localhost:8080/api/clientes/buscarUsuario/{codigo} => GET
+    // http://localhost:8080/api/clientes/buscarCliente/{codigo} => GET
     @GetMapping("/buscarCliente/{codigo}")
     public ResponseEntity<?> buscarClientePorCodigo(@PathVariable Long codigo){
         Optional<Cliente> cliente = clienteService.buscarClientePorCodigo(codigo);

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="CLIENTES")
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
@@ -24,20 +25,20 @@ public class Cliente {
     @Column(nullable = false, length = 60)
     private String finalidade;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = true, length = 60)
     private String cnpj;
 
-    @Column(nullable = false, length = 60)
-    private Long cep;
+    @Column(nullable = true, length = 60)
+    private String cep;
 
-    @Column(nullable = false, length = 60)
-    private Integer pais;
+    @Column(nullable = true, length = 60)
+    private String pais;
 
     @Column(nullable = false, length = 60)
     private String estado;
 
-    @Column(nullable = false, length = 60)
-    private Integer codmunicipio;
+    @Column(nullable = true, length = 60)
+    private String codmunicipio;
 
     @Column(nullable = false, length = 60)
     private String cidade;
@@ -45,32 +46,32 @@ public class Cliente {
     @Column(nullable = false, length = 60)
     private String endereco;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = true, length = 60)
     private String bairro;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = true, length = 60)
     private String ddd;
 
-    @Column(nullable = false, length = 60)
-    private Integer telefone;
+    @Column(nullable = true, length = 60)
+    private String telefone;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = true, length = 60)
     private String abertura;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = true, length = 60)
     private String contato;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = true, length = 60)
     private String email;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = true, length = 60)
     private String homepage;
 
     public Cliente(){
 
     }
 
-    public Cliente(Long codigo, String loja, String razao, String tipo, String nomefantasia, String finalidade, String cnpj, Long cep, int pais, String estado, int codmunicipio, String cidade, String endereco, String bairro, String ddd, int telefone, String abertura, String contato, String email, String homepage){
+    public Cliente(Long codigo, String loja, String razao, String tipo, String nomefantasia, String finalidade, String cnpj, String cep, String pais, String estado, String codmunicipio, String cidade, String endereco, String bairro, String ddd, String telefone, String abertura, String contato, String email, String homepage){
         this.codigo = codigo;
         this.loja = loja;
         this.razao = razao;
@@ -149,19 +150,19 @@ public class Cliente {
         this.cnpj = cnpj;
     }
 
-    public Long getCep(){
+    public String getCep(){
         return cep;
     }
 
-    public void setCep(Long cep){
+    public void setCep(String cep){
         this.cep = cep;
     }
 
-    public int getPais(){
+    public String getPais(){
         return pais;
     }
 
-    public void setPais(int pais){
+    public void setPais(String pais){
         this.pais = pais;
     }
 
@@ -173,11 +174,11 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public int getCodmunicipio(){
+    public String getCodmunicipio(){
         return codmunicipio;
     }
 
-    public void setCodmunicipio(int codmunicipio){
+    public void setCodmunicipio(String codmunicipio){
         this.codmunicipio = codmunicipio;
     }
 
@@ -213,11 +214,11 @@ public class Cliente {
         this.ddd = ddd;
     }
 
-    public int getTelefone(){
+    public String getTelefone(){
         return telefone;
     }
 
-    public void setTelefone(int telefone){
+    public void setTelefone(String telefone){
         this.telefone = telefone;
     }
 
