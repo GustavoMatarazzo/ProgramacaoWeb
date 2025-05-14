@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo;
+    @Column(nullable = false, length = 60)
+    private String codigo;
 
     @Column(nullable = false, length = 60)
     private String loja;
@@ -71,7 +71,7 @@ public class Cliente {
 
     }
 
-    public Cliente(Long codigo, String loja, String razao, String tipo, String nomefantasia, String finalidade, String cnpj, String cep, String pais, String estado, String codmunicipio, String cidade, String endereco, String bairro, String ddd, String telefone, String abertura, String contato, String email, String homepage){
+    public Cliente(String codigo, String loja, String razao, String tipo, String nomefantasia, String finalidade, String cnpj, String cep, String pais, String estado, String codmunicipio, String cidade, String endereco, String bairro, String ddd, String telefone, String abertura, String contato, String email, String homepage){
         this.codigo = codigo;
         this.loja = loja;
         this.razao = razao;
@@ -94,11 +94,11 @@ public class Cliente {
         this.homepage = homepage;
     }
 
-    public Long getCodigo(){
+    public String getCodigo(){
         return codigo;
     }
 
-    public void setCodigo(Long codigo){
+    public void setCodigo(String codigo){
         this.codigo = codigo;
     }
 

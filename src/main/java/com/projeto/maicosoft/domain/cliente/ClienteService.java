@@ -1,5 +1,6 @@
 package com.projeto.maicosoft.domain.cliente;
 import com.projeto.maicosoft.entities.Cliente;
+import com.projeto.maicosoft.exception.DuplicadoException;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClienteService {
     
+    @Autowired 
+    private EmailService emailService;
+
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -18,12 +22,20 @@ public class ClienteService {
     }
 
     public Cliente criarCliente(Cliente cliente){
-        cliente.setCodigo(null);
-        Cliente clienteCriado = clienteRepository.save(cliente);
-        return clienteCriado;
+        if (clienteRepository.existsById(cliente.getCodigo())) {
+            throw new DuplicadoException("Cliente com código '" + cliente.getCodigo() + "' já existe.");
+        }
+        Cliente clienteSalvo = clienteRepository.save(cliente);
+        String destinatario = "joao.laureano@fatec.sp.gov.br";
+        String assunto = "Novo cliente cadastrado: " + clienteSalvo.getCodigo();
+        String corpo = "O cliente " + clienteSalvo.getRazao() + " foi cadastrado com sucesso.\n"
+        + "Código: " + clienteSalvo.getCodigo() + "\n"
+        + "Loja: " + clienteSalvo.getLoja();
+        new Thread(() -> emailService.enviarEmailTexto(destinatario, assunto, corpo)).start();
+        return clienteSalvo;
     }
 
-    public boolean atualizarCliente(Long codigo, Cliente clienteAtualizado){
+    public boolean atualizarCliente(String codigo, Cliente clienteAtualizado){
         Optional<Cliente> clienteOptional = buscarClientePorCodigo(codigo);
         if(clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
@@ -52,7 +64,7 @@ public class ClienteService {
         return false;
     }
 
-    public boolean deletarCliente(Long codigo){
+    public boolean deletarCliente(String codigo){
         if(clienteRepository.existsById(codigo)){
             clienteRepository.deleteById(codigo);
             return true;
@@ -60,7 +72,7 @@ public class ClienteService {
         return false;
     }
 
-    public Optional<Cliente> buscarClientePorCodigo(Long codigo){
+    public Optional<Cliente> buscarClientePorCodigo(String codigo){
         return clienteRepository.findById(codigo);
     }
 }

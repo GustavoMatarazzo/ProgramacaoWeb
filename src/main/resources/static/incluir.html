@@ -13,7 +13,33 @@
 
         <!-- Adicionando Javascript -->
         <script>
-    
+            const token = localStorage.getItem('jwt');
+            if (!token) {
+                // Se não tiver token, redireciona para a tela de login
+                window.location.href = 'login.html';  
+            }
+            else {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const exp = payload.exp * 1000;
+
+                if (Date.now() > exp) {
+                    alert('Sua sessão expirou. Faça login novamente.');
+                    localStorage.removeItem('jwt');
+                    window.location.href = 'login.html';
+                } else {
+                    // Verifica a expiração a cada 5 segundos
+                    const checkExpiration = setInterval(() => {
+                        if (Date.now() > exp) {
+                            alert('Sua sessão expirou. Você será redirecionado para o login.');
+                            localStorage.removeItem('jwt');
+                            window.location.href = 'login.html';
+                            clearInterval(checkExpiration);
+                        }
+                    }, 5000); // Verifica a cada 5 segundos
+                }
+            }
+
+
             function limpa_formulário_cep() {
                     //Limpa valores do formulário de cep.
                     document.getElementById('endereco').value=("");
@@ -81,7 +107,7 @@
                     limpa_formulário_cep();
                 }
             };
-    
+
         </script>
     </head>
 
@@ -92,7 +118,7 @@
             <div class="form-group col-auto mr-5">
                 <button class="btn btn-primary" id="listarClientes">Listar Clientes</button>
             </div>
-        
+
             <div class="form-group col-auto ml-5">
                 <input type="text" class="form-control" id="codigoBusca" placeholder="Código" maxlength="6" style="max-width: 90px;">
             </div>
@@ -243,17 +269,20 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-
-            const username = 'restadmin';
-            const password = 'R3st@dm1N2';
+    <script> 
             const apiUrl = 'http://localhost:8080/api/clientes'; // Substitua pela URL real da sua API
-            const headers = new Headers();
-            headers.append('Authorization', 'Basic cmVzdGFkbWluOlIzc3RAZG0xTjI=' );//+ btoa(username + ':' + password));
+            const headers = {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            };
+
 
             // Listar Clientes
             document.getElementById('listarClientes').addEventListener('click', function() {
-                fetch(`${apiUrl}/listarClientes`, { headers: headers })
+                fetch(`${apiUrl}/listarClientes`, { 
+                    method: 'GET',
+                    headers: headers
+                })
                     .then(response => {
                         if (!response.ok) {
                             alert('Erro ao conectar com a API: ' + response.statusText);
@@ -302,6 +331,7 @@
             document.getElementById('formCliente').addEventListener('submit', function(event) {
             event.preventDefault();
 
+            const codigo = document.getElementById('codigo').value;
             const loja = document.getElementById('loja').value;
             const razao = document.getElementById('razao').value;
             const tipo = document.getElementById('tipo').value;
@@ -323,6 +353,7 @@
             const homepage = document.getElementById('homepage').value;
 
             const novoCliente = {
+                codigo: codigo,
                 loja: loja,
                 razao: razao,
                 tipo: tipo,
@@ -344,12 +375,15 @@
                 homepage: homepage
             };
 
+            // Confirmação antes de adicionar o cliente
+            const confirmacao = confirm("Você tem certeza que deseja adicionar este cliente?");
+            if (!confirmacao) {
+                return; // Se o usuário clicar em Cancelar, a ação não é executada
+            }
+
             fetch(`${apiUrl}/criarCliente`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + btoa(username + ':' + password)
-                },
+                headers: headers,
                 body: JSON.stringify(novoCliente)
             })
             .then(response => {
@@ -372,7 +406,10 @@
             return;
         }
 
-        fetch(`${apiUrl}/buscarCliente/${codigo}`, { headers: headers })
+        fetch(`${apiUrl}/buscarCliente/${codigo}`, {
+            method: 'GET',
+            headers: headers
+         })
             .then(response => {
                 if (!response.ok) {
                     alert('Cliente não encontrado!');
@@ -425,6 +462,12 @@
         if (!codigo) {
             alert("Digite um código para excluir.");
             return;
+        }
+
+        // Confirmação antes de excluir
+        const confirmacao = confirm("Você tem certeza que deseja excluir este cliente?");
+        if (!confirmacao) {
+            return; // Se o usuário clicar em Cancelar, a ação não é executada
         }
 
         fetch(`${apiUrl}/deletarCliente/${codigo}`, {

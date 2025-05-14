@@ -20,8 +20,6 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
     private static final Logger logger = LoggerFactory.getLogger(ClienteController.class.getName());
-    private final List<Cliente> clientes = new ArrayList<>();
-    private Long idCount = 1L;
 
     // http://localhost:8080/api/clientes/criarCliente => POST
     @PostMapping("/criarCliente")
@@ -39,31 +37,31 @@ public class ClienteController {
 
     // http://localhost:8080/api/clientes/deletarCliente/{codigo} => DELETE
     @DeleteMapping("/deletarCliente/{codigo}")
-        public ResponseEntity<String> deletarCliente(@PathVariable Long codigo){
+        public ResponseEntity<String> deletarCliente(@PathVariable String codigo){
             boolean removido = clienteService.deletarCliente(codigo);
             if(removido){
                 return ResponseEntity.ok("Cliente removido com sucesso!");
             }else{
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe cliente com código: " + codigo);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com código '" + codigo + "' não encontrado.");
             }
         }
 
     // http://localhost:8080/api/clientes/atualizarCliente/{codigo} => PUT
-    @PutMapping("atualizarCliente/{codigo}")
-    public ResponseEntity<String> atualizarCliente(@PathVariable Long codigo, @RequestBody Cliente clienteAtualizado){
+    @PutMapping("/atualizarCliente/{codigo}")
+    public ResponseEntity<String> atualizarCliente(@PathVariable String codigo, @RequestBody Cliente clienteAtualizado){
         boolean atualizado = clienteService.atualizarCliente(codigo, clienteAtualizado);
         if(atualizado){
             return ResponseEntity.ok("Cliente atualizado com sucesso!");
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com código: " + codigo);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com código '" + codigo + "' não encontrado.");
         }
     } 
 
     // http://localhost:8080/api/clientes/buscarCliente/{codigo} => GET
     @GetMapping("/buscarCliente/{codigo}")
-    public ResponseEntity<?> buscarClientePorCodigo(@PathVariable Long codigo){
+    public ResponseEntity<?> buscarClientePorCodigo(@PathVariable String codigo){
         Optional<Cliente> cliente = clienteService.buscarClientePorCodigo(codigo);
         return cliente.<ResponseEntity<?>>map(ResponseEntity::ok)
-        .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com codigo: " + codigo + " não encontrado."));
+        .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com código '" + codigo + "' não encontrado."));
     }
 }
