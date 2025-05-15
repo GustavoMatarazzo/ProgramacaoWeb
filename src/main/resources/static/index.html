@@ -1,0 +1,57 @@
+<!-
+    <!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MaicoSoft</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container mt-5">
+            <h1>Gerenciamento de Clientes</h1>
+            <div class="form-row">
+                <div class="form-group col-auto mr-5">
+                    <button class="btn btn-primary" id="criarCliente">Incluir</button>
+                </div>
+
+                <div class="form-group col-auto ml-5 mr-5">
+                    <button class="btn btn-primary" id="listarClientes">Listar Clientes</button>
+                </div>
+
+                <div class="form-group col-auto ml-5">
+                    <input type="text" class="form-control" id="codigoBusca" placeholder="Código" maxlength="6" style="max-width: 90px;">
+                </div>
+                <div class="form-group col-auto mr-5">
+                    <button class="btn btn-primary" id="buscarCliente">Buscar Cliente</button>
+                </div>
+            
+                <div class="form-group col-auto ml-5">
+                    <input type="text" class="form-control" id="codigoExcluir" placeholder="Código" maxlength="6" style="max-width: 90px;">
+                </div>
+                <div class="form-group col-auto mr-5">
+                    <button class="btn btn-danger" id="excluirCliente">Excluir Cliente</button>
+                </div>
+            </div>
+            <div id="clientes" class="list-group mb-3"></div>
+            <form id="formCliente"></form>
+        </div>
+        <script>
+            document.getElementById('criarCliente').addEventListener('click', function() {
+            window.location.href = 'incluir.html';
+        })
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="clientes.js"></script>
+    </body>
+</html>
+-->

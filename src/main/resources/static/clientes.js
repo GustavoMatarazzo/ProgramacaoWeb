@@ -1,9 +1,34 @@
+const token = localStorage.getItem('jwt');
+if (!token) {
+    // Se não tiver token, redireciona para a tela de login
+    window.location.href = 'login.html';  
+}
+else {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const exp = payload.exp * 1000;
+
+    if (Date.now() > exp) {
+        alert('Sua sessão expirou. Faça login novamente.');
+        localStorage.removeItem('jwt');
+        window.location.href = 'login.html';
+    } else {
+        // Verifica a expiração a cada 5 segundos
+        const checkExpiration = setInterval(() => {
+            if (Date.now() > exp) {
+                alert('Sua sessão expirou. Você será redirecionado para o login.');
+                localStorage.removeItem('jwt');
+                window.location.href = 'login.html';
+                clearInterval(checkExpiration);
+            }
+        }, 5000); // Verifica a cada 5 segundos
+    }
+}
+
 const apiUrl = 'http://localhost:8080/api/clientes'; // Substitua pela URL real da sua API
 const headers = {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
 };
-
 
 // Listar Clientes
 document.getElementById('listarClientes').addEventListener('click', function() {
@@ -103,10 +128,10 @@ const novoCliente = {
     homepage: homepage
 };
 
-// Confirmação antes de adicionar o cliente
-const confirmacao = confirm("Você tem certeza que deseja adicionar este cliente?");
-if (!confirmacao) {
-    return; // Se o usuário clicar em Cancelar, a ação não é executada
+ // Confirmação antes de adicionar o cliente
+ const confirmacao = confirm("Você tem certeza que deseja adicionar este cliente?");
+ if (!confirmacao) {
+   return; // Se o usuário clicar em Cancelar, a ação não é executada
 }
 
 fetch(`${apiUrl}/criarCliente`, {
