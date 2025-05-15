@@ -1,29 +1,3 @@
-const token = localStorage.getItem('jwt');
-if (!token) {
-    // Se não tiver token, redireciona para a tela de login
-    window.location.href = 'login.html';  
-}
-else {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    const exp = payload.exp * 1000;
-
-    if (Date.now() > exp) {
-        alert('Sua sessão expirou. Faça login novamente.');
-        localStorage.removeItem('jwt');
-        window.location.href = 'login.html';
-    } else {
-        // Verifica a expiração a cada 5 segundos
-        const checkExpiration = setInterval(() => {
-            if (Date.now() > exp) {
-                alert('Sua sessão expirou. Você será redirecionado para o login.');
-                localStorage.removeItem('jwt');
-                window.location.href = 'login.html';
-                clearInterval(checkExpiration);
-            }
-        }, 5000); // Verifica a cada 5 segundos
-    }
-}
-
 const apiUrl = 'http://localhost:8080/api/clientes'; // Substitua pela URL real da sua API
 const headers = {
     'Authorization': `Bearer ${token}`,
@@ -78,76 +52,6 @@ document.getElementById('listarClientes').addEventListener('click', function() {
             alert('Clientes listados com sucesso!');
         })
         .catch(error => console.error('Erro:', error));
-});
-
-// Adicionar Cliente
-document.getElementById('formCliente').addEventListener('submit', function(event) {
-event.preventDefault();
-
-const codigo = document.getElementById('codigo').value;
-const loja = document.getElementById('loja').value;
-const razao = document.getElementById('razao').value;
-const tipo = document.getElementById('tipo').value;
-const nomefantasia = document.getElementById('nomefantasia').value;
-const finalidade = document.getElementById('finalidade').value;
-const cnpj = document.getElementById('cnpj').value;
-const cep = document.getElementById('cep').value;
-const pais = document.getElementById('pais').value;
-const estado = document.getElementById('estado').value;
-const codmunicipio = document.getElementById('codmunicipio').value;
-const cidade = document.getElementById('cidade').value;
-const endereco = document.getElementById('endereco').value;
-const bairro = document.getElementById('bairro').value;
-const ddd = document.getElementById('ddd').value;
-const telefone = document.getElementById('telefone').value;
-const abertura = document.getElementById('abertura').value;
-const contato = document.getElementById('contato').value;
-const email = document.getElementById('email').value;
-const homepage = document.getElementById('homepage').value;
-
-const novoCliente = {
-    codigo: codigo,
-    loja: loja,
-    razao: razao,
-    tipo: tipo,
-    nomefantasia: nomefantasia,
-    finalidade: finalidade,
-    cnpj: cnpj,
-    cep: cep,
-    pais: pais,
-    estado: estado,
-    codmunicipio: codmunicipio,
-    cidade: cidade,
-    endereco: endereco,
-    bairro: bairro,
-    ddd: ddd,
-    telefone: telefone,
-    abertura: abertura,
-    contato: contato,
-    email: email,
-    homepage: homepage
-};
-
- // Confirmação antes de adicionar o cliente
- const confirmacao = confirm("Você tem certeza que deseja adicionar este cliente?");
- if (!confirmacao) {
-   return; // Se o usuário clicar em Cancelar, a ação não é executada
-}
-
-fetch(`${apiUrl}/criarCliente`, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify(novoCliente)
-})
-.then(response => {
-    if (response.ok) {
-        alert('Cliente adicionado com sucesso!');
-        document.getElementById('formCliente').reset();
-    } else {
-        alert('Erro ao adicionar cliente: ' + response.statusText);
-    }
-})
-.catch(error => console.error('Erro:', error));
 });
 
 // Buscar Cliente
