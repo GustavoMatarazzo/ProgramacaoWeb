@@ -5,24 +5,59 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MaicoSoft</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
         <style>
             body {
                 background-color: #f8f9fa;
             }
+
+            .table-responsive {
+                max-height: 500px;
+                overflow-y: auto;
+                overflow-x: auto;
+            }
+
+            table {
+                table-layout: auto;
+                font-size: 14px;
+                width: 100%;
+            }
+
+            table th, table td {
+                padding: 8px;
+                min-width: 200px;
+                vertical-align: middle;
+                text-align: left;
+            }
+
+                      
+            table th, table td:first-child {
+                width: 40px !important;
+                min-width: 40px !important;
+                max-width: 40px !important;
+                text-align: center;
+            }
+
         </style>
         <script src="/js/token.js"></script>
     </head>
 
     <body>
+        <header class="bg-white shadow-sm mb-4">
+            <div class="container-fluid d-flex align-items-center py-2" style="padding-left: 10;">
+                <a href="index.html" class="d-flex align-items-center">
+                    <img src="/images/logo.png" alt="logo" style="height: 40px;">
+                </a>
+            </div>
+        </header>
+        Sair do site?
+        É possível que as alterações feitas não sejam salvas.
+        Sair Cancelar
         <div class="container mt-5">
             <h1>Gerenciamento de Clientes</h1>
             <div class="form-row">
                 <div class="form-group col-auto mr-5">
                     <a href="incluir.html" class="btn btn-primary">Incluir</a>
-                </div>
-
-                <div class="form-group col-auto ml-5 mr-5">
-                    <button class="btn btn-primary" id="listarClientes">Listar Clientes</button>
                 </div>
 
                 <div class="form-group col-auto ml-5">
@@ -31,15 +66,44 @@
                 <div class="form-group col-auto mr-5">
                     <button class="btn btn-primary" id="buscarCliente">Buscar Cliente</button>
                 </div>
-            
                 <div class="form-group col-auto ml-5">
-                    <input type="text" class="form-control" id="codigoExcluir" placeholder="Código" maxlength="6" style="max-width: 90px;">
-                </div>
-                <div class="form-group col-auto mr-5">
-                    <button class="btn btn-danger" id="excluirCliente">Excluir Cliente</button>
+                    <button class="btn btn-danger" id="excluirSelecionado" disabled>Excluir Cliente</button>
                 </div>
             </div>
-            <div id="clientes" class="list-group mb-3"></div>
+            
+            <div class="card p-4 shadow-sm">
+                <div class="table-responsive">
+                    <table id="tabelaClientes" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;"></th>
+                                <th>Código</th>
+                                <th>Loja</th>
+                                <th>Razão Social</th>
+                                <th>Tipo</th>
+                                <th>Nome Fantasia</th>
+                                <th>Finalidade</th>
+                                <th>CNPJ</th>
+                                <th>CEP</th>                               
+                                <th>País</th>
+                                <th>Estado</th>
+                                <th>Cód. Município</th>
+                                <th>Cidade</th>
+                                <th>Endereço</th>
+                                <th>Bairro</th>
+                                <th>DDD</th>
+                                <th>Telefone</th>
+                                <th>Abertura</th>
+                                <th>Contato</th>
+                                <th>Email</th>
+                                <th>Homepage</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
             <form id="formCliente"></form>
         </div>
 
