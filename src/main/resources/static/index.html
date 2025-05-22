@@ -50,33 +50,37 @@
                 </a>
             </div>
         </header>
-        Sair do site?
-        É possível que as alterações feitas não sejam salvas.
-        Sair Cancelar
         <div class="container mt-5">
             <h1>Gerenciamento de Clientes</h1>
-            <div class="form-row">
-                <div class="form-group col-auto mr-5">
-                    <a href="incluir.html" class="btn btn-primary">Incluir</a>
+            <div class="card p-4 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-group col-auto">
+                        <a href="incluir.html" class="btn btn-primary">Incluir</a>
+                    </div>
+                    <div class="d-flex">
+                        <div class="form-group col-auto">
+                            <button class="btn btn-outline-warning" id="alterarSelecionado" disabled><img src="/images/editar.png" alt="alterar" style="height: 25px;"></button>
+                        </div>
+                        <div class="form-group col-auto">
+                            <button class="btn btn-outline-danger" id="excluirSelecionado" disabled><img src="/images/lixeira.png" alt="excluir" style="height: 25px;"></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-auto">
+                        <input type="text" class="form-control" id="codigoBusca" placeholder="Pesquisar" maxlength="6" style="max-width: 200px;">
+                    </div>
+                    <div class="form-group col-auto mr-5">
+                        <button class="btn btn-primary" id="buscarCliente">Buscar</button>
+                    </div>
                 </div>
 
-                <div class="form-group col-auto ml-5">
-                    <input type="text" class="form-control" id="codigoBusca" placeholder="Código" maxlength="6" style="max-width: 90px;">
-                </div>
-                <div class="form-group col-auto mr-5">
-                    <button class="btn btn-primary" id="buscarCliente">Buscar Cliente</button>
-                </div>
-                <div class="form-group col-auto ml-5">
-                    <button class="btn btn-danger" id="excluirSelecionado" disabled>Excluir Cliente</button>
-                </div>
-            </div>
-            
-            <div class="card p-4 shadow-sm">
                 <div class="table-responsive">
                     <table id="tabelaClientes" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th style="width: 40px;"></th>
+                                <th></th>
                                 <th>Código</th>
                                 <th>Loja</th>
                                 <th>Razão Social</th>

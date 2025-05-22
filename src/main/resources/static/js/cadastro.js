@@ -1,4 +1,5 @@
-const apiUrl = 'http://localhost:8080/api/clientes'; // Substitua pela URL real da sua API
+// Criar Cliente
+const apiUrl = 'http://localhost:8080/api/clientes'; 
 const headers = {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
@@ -32,11 +33,10 @@ document.getElementById('formCliente').addEventListener('submit', function(event
     homepage: document.getElementById('homepage').value
   };
 
-  $('#confirmarSalvarModal').modal('show'); // Usa jQuery para exibir o modal
+  $('#confirmarSalvarModal').modal('show');
 });
 
 document.getElementById('confirmarSalvarBtn').addEventListener('click', function() {
-  // Aqui você faz o POST usando clienteTemp
   fetch(`${apiUrl}/criarCliente`, {
     method: 'POST',
     headers: headers,
