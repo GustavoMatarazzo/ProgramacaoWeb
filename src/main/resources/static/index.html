@@ -53,11 +53,15 @@
         <div class="container mt-5">
             <h1>Gerenciamento de Clientes</h1>
             <div class="card p-4 shadow-sm">
+
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div class="form-group col-auto">
+                    <div class="form-group">
                         <a href="incluir.html" class="btn btn-primary">Incluir</a>
                     </div>
                     <div class="d-flex">
+                        <div class="form-group col-auto">
+                            <button class="btn btn-outline-primary" id="visualizarSelecionado" disabled><img src="/images/visualizar.png" alt="buscar" style="height: 25px;"></button>
+                        </div>
                         <div class="form-group col-auto">
                             <button class="btn btn-outline-warning" id="alterarSelecionado" disabled><img src="/images/editar.png" alt="alterar" style="height: 25px;"></button>
                         </div>
@@ -67,45 +71,76 @@
                     </div>
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group col-auto">
-                        <input type="text" class="form-control" id="codigoBusca" placeholder="Pesquisar" maxlength="6" style="max-width: 200px;">
+                
+                <div id="tabelaContainer">
+
+                    <div class="input-group mb-3" style="max-width: 100%;">
+                        <select class="custom-select" disabled style="max-width: 120px;">
+                            <option value="codigo" selected>Código</option>
+                        </select>
+                        <input type="text" id="filtroCodigo" class="form-control" placeholder="Digite o código..." maxlength="6" aria-label="Buscar por código">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" id="btnPesquisar">Pesquisar</button>
+                        </div>
                     </div>
-                    <div class="form-group col-auto mr-5">
-                        <button class="btn btn-primary" id="buscarCliente">Buscar</button>
+
+                    <div class="table-responsive">
+                        <table id="tabelaClientes" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Código</th>
+                                    <th>Loja</th>
+                                    <th>Razão Social</th>
+                                    <th>Tipo</th>
+                                    <th>Nome Fantasia</th>
+                                    <th>Finalidade</th>
+                                    <th>CNPJ</th>
+                                    <th>CEP</th>                               
+                                    <th>País</th>
+                                    <th>Estado</th>
+                                    <th>Cód. Município</th>
+                                    <th>Cidade</th>
+                                    <th>Endereço</th>
+                                    <th>Bairro</th>
+                                    <th>DDD</th>
+                                    <th>Telefone</th>
+                                    <th>Abertura</th>
+                                    <th>Contato</th>
+                                    <th>Email</th>
+                                    <th>Homepage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="modelo-layout" style="visibility: collapse;">
+                                    <td></td>
+                                    <td>000000</td>
+                                    <td>00</td>
+                                    <td>Razão Social</td>
+                                    <td>Tipo</td>
+                                    <td>Nome Fantasia</td>
+                                    <td>Finalidade</td>
+                                    <td>00.000.000/0000-00</td>
+                                    <td>00000-000</td>
+                                    <td>Brasil</td>
+                                    <td>SP</td>
+                                    <td>1234567</td>
+                                    <td>Cidade</td>
+                                    <td>Endereço</td>
+                                    <td>Bairro</td>
+                                    <td>11</td>
+                                    <td>123456789</td>
+                                    <td>01/01/2020</td>
+                                    <td>Contato</td>
+                                    <td>email@exemplo.com</td>
+                                    <td>www.exemplo.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
 
-                <div class="table-responsive">
-                    <table id="tabelaClientes" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Código</th>
-                                <th>Loja</th>
-                                <th>Razão Social</th>
-                                <th>Tipo</th>
-                                <th>Nome Fantasia</th>
-                                <th>Finalidade</th>
-                                <th>CNPJ</th>
-                                <th>CEP</th>                               
-                                <th>País</th>
-                                <th>Estado</th>
-                                <th>Cód. Município</th>
-                                <th>Cidade</th>
-                                <th>Endereço</th>
-                                <th>Bairro</th>
-                                <th>DDD</th>
-                                <th>Telefone</th>
-                                <th>Abertura</th>
-                                <th>Contato</th>
-                                <th>Email</th>
-                                <th>Homepage</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
             </div>
 
             <form id="formCliente"></form>

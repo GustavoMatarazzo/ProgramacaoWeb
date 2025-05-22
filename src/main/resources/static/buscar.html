@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Alterar - MaicoSoft</title>
+        <title>Visualizar - MaicoSoft</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {
@@ -30,14 +30,11 @@
                 <form id="formCliente1">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
-                        <h3>Clientes - ALTERAR</h3>
+                        <h3>Clientes - VISUALIZAR</h3>
                     </div>
                     <div class="d-flex">
                         <div class="form-group col-auto">
                             <a href="index.html" class="btn btn-danger">Fechar</a>
-                        </div>
-                        <div class="form-group col-auto">
-                            <button type="submit" class="btn btn-success">Alterar</button>
                         </div>
                     </div>
                 </div>
@@ -55,11 +52,11 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="razao">Razão <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="razao" maxlength="40" autocomplete="off" required>
+                            <input type="text" class="form-control" id="razao" maxlength="40" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="tipo">Tipo <span style="color: red;">*</span></label>
-                            <select class="form-control" id="tipo" required>
+                            <select class="form-control" id="tipo" disabled>
                                 <option value="">Selecione o tipo</option>
                                 <option value="F">F - Físico</option>
                                 <option value="J">J - Jurídico</option>
@@ -70,29 +67,29 @@
                     <div class="form-row">
                         <div class="form-group col-md-5">
                             <label for="nomefantasia">Nome Fantasia <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="nomefantasia" maxlength="40" autocomplete="off" required>
+                            <input type="text" class="form-control" id="nomefantasia" maxlength="40" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="finalidade">Finalidade <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="finalidade" maxlength="40" autocomplete="off" required>
+                            <input type="text" class="form-control" id="finalidade" maxlength="40" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="cnpj">CNPJ</label>
-                            <input type="text" class="form-control" id="cnpj" maxlength="14" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                            <input type="text" class="form-control" id="cnpj" maxlength="14" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="cep">CEP</label>
-                            <input type="text" class="form-control" id="cep" maxlength="8" oninput="this.value = this.value.replace(/\D/g, '')" onblur="pesquisacep(this.value);" autocomplete="off">
+                            <input type="text" class="form-control" id="cep" maxlength="8" oninput="this.value = this.value.replace(/\D/g, '')" onblur="pesquisacep(this.value);" autocomplete="off" disabled>
                         </div>
                     </div>
                     <div class="form-row"> 
                         <div class="form-group col-md-1">
                             <label for="pais">Pais</label>
-                            <input type="text" class="form-control" id="pais" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                            <input type="text" class="form-control" id="pais" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="estado">Estado <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" list="estados" id="estado" maxlength="2" oninput="this.value = this.value.toUpperCase();" autocomplete="off" required>
+                            <input type="text" class="form-control" list="estados" id="estado" maxlength="2" oninput="this.value = this.value.toUpperCase();" autocomplete="off" disabled>
                             <datalist id="estados">
                                 <option value="AC">
                                 <option value="AL">
@@ -126,76 +123,56 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="codmunicipio">Cod Municipio</label>
-                            <input type="text" class="form-control" id="codmunicipio" maxlength="7" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                            <input type="text" class="form-control" id="codmunicipio" maxlength="7" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="cidade">Cidade <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="cidade" maxlength="40" autocomplete="off" required>
+                            <input type="text" class="form-control" id="cidade" maxlength="40" autocomplete="off" disabled>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-5">
                             <label for="endereco">Endereco <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="endereco" maxlength="40" autocomplete="off" required>
+                            <input type="text" class="form-control" id="endereco" maxlength="40" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="bairro">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" maxlength="40" autocomplete="off">
+                            <input type="text" class="form-control" id="bairro" maxlength="40" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-1">
                             <label for="ddd">DDD</label>
-                            <input type="text" class="form-control" id="ddd" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                            <input type="text" class="form-control" id="ddd" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off" disabled>
                         </div>
                             <div class="form-group col-md-2">
                             <label for="telefone">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" maxlength="8" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                            <input type="text" class="form-control" id="telefone" maxlength="8" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off" disabled>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="abertura">Abertura</label>
-                            <input type="date" class="form-control" id="abertura" maxlength="40">
+                            <input type="date" class="form-control" id="abertura" maxlength="40" disabled>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="contato">Contato</label>
-                            <input type="text" class="form-control" id="contato" maxlength="40" autocomplete="off">
+                            <input type="text" class="form-control" id="contato" maxlength="40" autocomplete="off" disabled>
                         </div>
                             <div class="form-group col-md-4">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" maxlength="40" autocomplete="off">
+                            <input type="email" class="form-control" id="email" maxlength="40" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="homepage">Homepage</label>
-                            <input type="url" class="form-control" id="homepage" maxlength="40" autocomplete="off">
+                            <input type="url" class="form-control" id="homepage" maxlength="40" autocomplete="off" disabled>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
-        <div class="modal fade" id="confirmarAlterarModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Salvar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Você tem certeza que deseja alterar este cliente?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" id="confirmarAlterarBtn">Confirmar</button>
-            </div>
-            </div>
-        </div>
-        </div>
         
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="/js/alterar.js"></script>
+        <script src="/js/buscar.js"></script>
     </body>
 </html>

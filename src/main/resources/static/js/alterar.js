@@ -1,19 +1,18 @@
-// Atualizar Cliente
-const apiUrl = 'http://localhost:8080/api/clientes';
-const headers = {
+  const apiUrl = 'http://localhost:8080/api/clientes';
+  const headers = {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
-};
+  };
 
-const codigo = localStorage.getItem('clienteCodigo');
+  const codigo = localStorage.getItem('clienteCodigo');
 
-// Buscar Cliente
-window.addEventListener('DOMContentLoaded', () => {
+  // Buscar Cliente
+  window.addEventListener('DOMContentLoaded', () => {
     if (!codigo) {
       alert("Nenhum cliente selecionado para edição.");
       return;
     }
-  
+      
     fetch(`${apiUrl}/buscarCliente/${codigo}`, {
       method: 'GET',
       headers: headers
@@ -50,13 +49,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-// Atualizar Cliente
-let clienteTemp = null;
+  // Atualizar Cliente
+  let clienteTemp = null;
 
-document.getElementById('formCliente1').addEventListener('submit', function(event) {
-  event.preventDefault();
+  document.getElementById('formCliente1').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-  clienteTemp = {
+    clienteTemp = {
     codigo: document.getElementById('codigo').value,
     loja: document.getElementById('loja').value,
     razao: document.getElementById('razao').value,
@@ -77,43 +76,44 @@ document.getElementById('formCliente1').addEventListener('submit', function(even
     contato: document.getElementById('contato').value,
     email: document.getElementById('email').value,
     homepage: document.getElementById('homepage').value
-  };
+    };
 
-  $('#confirmarAlterarModal').modal('show');
-});
-
-document.getElementById('confirmarAlterarBtn').addEventListener('click', function() {
-const codigo = document.getElementById('codigo').value;
-if (!codigo) {
-  alert("Código do cliente não encontrado.");
-  return;
-}
-if (!clienteTemp) {
-  alert("Erro: Nenhum dado do cliente encontrado para atualização.");
-  return;
-}
-  fetch(`${apiUrl}/atualizarCliente/${codigo}`, {
-    method: 'PUT',
-    headers: headers,
-    body: JSON.stringify(clienteTemp)
-  })
-  .then(response => {
-    if (!response.ok) {
-      return response.text().then(errorMessage => {
-        throw new Error(`Erro ao alterar: ${errorMessage}`);
-      });
-    }
-    return response.text();
-  })
-  .then(data => {
-    $('#confirmarAlterarModal').modal('hide');
-    alert("Cliente alterado com sucesso!");
-    document.getElementById('formCliente1').reset();
-    localStorage.removeItem('clienteCodigo');
-  })
-  .catch(error => {
-    $('#confirmarAlterarModal').modal('hide');
-    alert("Erro ao alterar cliente.");
-    console.error(error);
+    $('#confirmarAlterarModal').modal('show');
   });
-});
+
+  document.getElementById('confirmarAlterarBtn').addEventListener('click', function() {
+    const codigo = document.getElementById('codigo').value;
+    if (!codigo) {
+      alert("Código do cliente não encontrado.");
+      return;
+    }
+    if (!clienteTemp) {
+      alert("Erro: Nenhum dado do cliente encontrado para atualização.");
+      return;
+    }
+
+    fetch(`${apiUrl}/atualizarCliente/${codigo}`, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify(clienteTemp)
+    })
+    .then(response => {
+      if (!response.ok) {
+        return response.text().then(errorMessage => {
+          throw new Error(`Erro ao alterar: ${errorMessage}`);
+        });
+        }
+      return response.text();
+    })
+    .then(data => {
+      $('#confirmarAlterarModal').modal('hide');
+      alert("Cliente alterado com sucesso!");
+      document.getElementById('formCliente1').reset();
+      localStorage.removeItem('clienteCodigo');
+    })
+    .catch(error => {
+      $('#confirmarAlterarModal').modal('hide');
+      alert("Erro ao alterar cliente.");
+      console.error(error);
+    });
+  });
