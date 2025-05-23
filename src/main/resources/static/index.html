@@ -44,19 +44,21 @@
 
     <body>
         <header class="bg-white shadow-sm mb-4">
-            <div class="container-fluid d-flex align-items-center py-2" style="padding-left: 10;">
+            <div class="container-fluid d-flex align-items-center py-2 justify-content-between py-2" style="padding-left: 10;">
                 <a href="index.html" class="d-flex align-items-center">
                     <img src="/images/logo.png" alt="logo" style="height: 40px;">
                 </a>
+                <button type="button" class="btn btn-danger" onclick="verificarSaida()">Desconectar</button>
             </div>
         </header>
+
         <div class="container mt-5">
             <h1>Gerenciamento de Clientes</h1>
             <div class="card p-4 shadow-sm">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="form-group">
-                        <a href="incluir.html" class="btn btn-primary">Incluir</a>
+                        <a href="incluir.html" class="btn btn-success">Adicionar cliente</a>
                     </div>
                     <div class="d-flex">
                         <div class="form-group col-auto">
@@ -70,7 +72,6 @@
                         </div>
                     </div>
                 </div>
-                
                 
                 <div id="tabelaContainer">
 
@@ -138,13 +139,61 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
 
             </div>
 
             <form id="formCliente"></form>
         </div>
+
+        <!--
+        <div class="modal fade" id="confirmarExcluirModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Excluir</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Esta operação não poderá ser desfeita após a confirmação da exclusão. Você tem certeza que deseja excluir este cliente?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarExcluirBtn">Confirmar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        -->
+
+        <!-- Modal de confirmação de saída -->
+        <div class="modal" id="confirmarDesconectarModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Desconectar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>O processo da sessão atual será interrompido. Tem certeza que deseja desconectar?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarDesconectarBtn">Desconectar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+        <script>
+            function verificarSaida() {
+                $('#confirmarDesconectarModal').modal('show');
+            }
+        </script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

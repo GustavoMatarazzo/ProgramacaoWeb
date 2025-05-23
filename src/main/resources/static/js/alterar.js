@@ -110,6 +110,7 @@
       alert("Cliente alterado com sucesso!");
       document.getElementById('formCliente1').reset();
       localStorage.removeItem('clienteCodigo');
+      window.location.href = 'index.html';
     })
     .catch(error => {
       $('#confirmarAlterarModal').modal('hide');
