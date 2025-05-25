@@ -20,17 +20,17 @@
             return response.json();
         })
         .then(data => {
-            const tbody = document.querySelector('#tabelaClientes tbody');
-            tbody.innerHTML = '';
+            const tbody = document.getElementById('tabela-clientes');
+            tbody.innerHTML = `
+            <tr class="linha-modelo" style="visibility: collapse;">
+                ${'<td></td>'.repeat(21)}
+            </tr>
+            `;
 
             if (data.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                    <td colspan="21" class="text-left text-muted">
-                        Nenhum cliente cadastrado ainda.
-                    </td>
-                    <tr class="modelo-layout" style="visibility: collapse;">
-                        ${'<td></td>'.repeat(21)}
+                tbody.innerHTML += `
+                    <tr class="mensagem-vazia text-muted">
+                        <td colspan="21" class="text-center">Nenhum cliente cadastrado ainda.</td>
                     </tr>
                 `;
                 return;
@@ -100,38 +100,44 @@
     }
 
     // Excluir Cliente
-     document
-        .getElementById("excluirSelecionado")
-        .addEventListener("click", function () {
-            if (!clienteSelecionado) {
-                alert("Nenhum cliente selecionado.");
-                return;
+    document.getElementById("excluirSelecionado").addEventListener("click", () => {
+        if(!clienteSelecionado){
+            alert("Nenhum cliente selecionado.");
+            return;
+        }
+        $('#confirmarExcluirModal').modal('show');
+     });
+     
+    document.getElementById("confirmarExcluirBtn").addEventListener("click", () => {
+        if (!clienteSelecionado) {
+            alert("Nenhum cliente selecionado.");
+            $('#confirmarExcluirModal').modal('hide');
+            return;
+        }
+
+        fetch(`${apiUrl}/deletarCliente/${clienteSelecionado}`, {
+            method: "DELETE",
+            headers: headers,
+        })
+        .then((response) => {
+            if (!response.ok) {
+                alert("Cliente não encontrado!");
+                throw new Error("Cliente não encontrado");
             }
-
-            const confirmacao = confirm(
-                `Você tem certeza que deseja excluir o cliente ${clienteSelecionado}?`
-            );
-            if (!confirmacao) return;
-
-            fetch(`${apiUrl}/deletarCliente/${clienteSelecionado}`, {
-                method: "DELETE",
-                headers: headers,
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        alert("Cliente não encontrado!");
-                        throw new Error("Cliente não encontrado");
-                    }
-                    return response.text();
-                })
-                .then((mensagem) => {
-                    alert(mensagem);
-                    clienteSelecionado = null;
-                    this.disabled = true;
-                    carregarClientes();
-                })
-                .catch((error) => console.error("Erro:", error));
+            return response.text();
+        })
+        .then((mensagem) => {
+            alert(mensagem);
+            clienteSelecionado = null;
+            this.disabled = true;
+            carregarClientes();
+            $('#confirmarExcluirModal').modal('hide');
+        })
+        .catch((error) => {
+            console.error("Erro:", error);
+            $('#confirmarExcluirModal').modal('hide');
         });
+    });
 
     // Atualizar Cliente
     document
@@ -146,85 +152,45 @@
     })
 
     // Buscar Cliente
-    document
-    .getElementById("visualizarSelecionado")
-    .addEventListener("click", function () {
+    document.getElementById('visualizarSelecionado').addEventListener('click', () => {
         if (!clienteSelecionado) {
-            alert("Nenhum cliente selecionado.");
-            return;
-        } 
-        localStorage.setItem('clienteCodigo', clienteSelecionado);
-        window.location.href = 'buscar.html';
-    })
-
-    // Busca filtrada por código
-    document.getElementById('btnPesquisar').addEventListener('click', function() {
-    const codigo = document.getElementById('filtroCodigo').value.trim();
-
-    if (codigo === '') {
-        carregarClientes();
-        return;
-    }
-
-    fetch(`${apiUrl}/buscarCliente/${codigo}`, {
-        method: 'GET',
-        headers: headers
-    })
-    .then(response => {
-        if (!response.ok) {
-            alert('Erro ao buscar cliente: ' + response.statusText);
-            throw new Error('Erro na rede');
-        }
-        return response.json();
-    })
-    .then(data => {
-        const tbody = document.querySelector('#tabelaClientes tbody');
-        tbody.innerHTML = '';
-
-        if (!data || (Array.isArray(data) && data.length === 0)) {
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="21" class="text-left text-muted">Nenhum cliente encontrado para o código informado.</td>
-                </tr>
-                <tr class="modelo-layout" style="visibility: collapse;">
-                    ${'<td></td>'.repeat(21)}
-                </tr>
-            `;
+            alert("Nenhum cliente selecionado para visualização.");
             return;
         }
-
-        const clientes = Array.isArray(data) ? data : [data];
-
-        clientes.forEach(cliente => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><input type="checkbox" class="selecionar-cliente" data-codigo="${cliente.codigo}"></td>
-                <td>${cliente.codigo}</td>
-                <td>${cliente.loja}</td>
-                <td>${cliente.razao}</td>
-                <td>${cliente.tipo}</td>
-                <td>${cliente.nomefantasia}</td>
-                <td>${cliente.finalidade}</td>
-                <td>${cliente.cnpj}</td>
-                <td>${cliente.cep}</td>
-                <td>${cliente.pais}</td>
-                <td>${cliente.estado}</td>
-                <td>${cliente.codmunicipio}</td>
-                <td>${cliente.cidade}</td>
-                <td>${cliente.endereco}</td>
-                <td>${cliente.bairro}</td>
-                <td>${cliente.ddd}</td>
-                <td>${cliente.telefone}</td>
-                <td>${cliente.abertura}</td>
-                <td>${cliente.contato}</td>
-                <td>${cliente.email}</td>
-                <td>${cliente.homepage}</td>
-            `;
-            tbody.appendChild(row);
+    
+        fetch(`${apiUrl}/buscarCliente/${clienteSelecionado}`, {
+            method: 'GET',
+            headers: headers
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Cliente não encontrado');
+            return response.json();
+        })
+        .then(cliente => {
+            document.getElementById('codigo').value = cliente.codigo;
+            document.getElementById('loja').value = cliente.loja;
+            document.getElementById('razao').value = cliente.razao;
+            document.getElementById('tipo').value = cliente.tipo;
+            document.getElementById('nomefantasia').value = cliente.nomefantasia;
+            document.getElementById('finalidade').value = cliente.finalidade;
+            document.getElementById('cnpj').value = cliente.cnpj;
+            document.getElementById('cep').value = cliente.cep;
+            document.getElementById('pais').value = cliente.pais;
+            document.getElementById('estado').value = cliente.estado;
+            document.getElementById('codmunicipio').value = cliente.codmunicipio;
+            document.getElementById('cidade').value = cliente.cidade;
+            document.getElementById('endereco').value = cliente.endereco;
+            document.getElementById('bairro').value = cliente.bairro;
+            document.getElementById('ddd').value = cliente.ddd;
+            document.getElementById('telefone').value = cliente.telefone;
+            document.getElementById('abertura').value = cliente.abertura;
+            document.getElementById('contato').value = cliente.contato;
+            document.getElementById('email').value = cliente.email;
+            document.getElementById('homepage').value = cliente.homepage;
+             $('#modalVisualizar').modal('show');
+        })
+        .catch(error => {
+            alert("Erro ao carregar cliente.");
+            console.error(error);
         });
-
-        ativarCheckboxes();
-
-    })
-    .catch(error => console.error('Erro:', error));
-});
+    });

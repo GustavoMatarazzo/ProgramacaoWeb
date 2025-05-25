@@ -26,7 +26,7 @@ public class ClienteService {
             throw new DuplicadoException("Cliente com código '" + cliente.getCodigo() + "' já existe.");
         }
         Cliente clienteSalvo = clienteRepository.save(cliente);
-        String destinatario = "joao.laureanoo@fatec.sp.gov.br";
+        String destinatario = "fiscal1maicosoft@hotmail.com";
         String assunto = "Novo cliente cadastrado: " + clienteSalvo.getCodigo();
         String corpo = "O cliente " + clienteSalvo.getRazao() + " foi cadastrado com sucesso.\n"
         + "Código: " + clienteSalvo.getCodigo() + "\n"

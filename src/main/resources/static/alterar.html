@@ -3,11 +3,35 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+        <link rel="manifest" href="/images/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
         <title>Alterar cliente - MaicoSoft</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {
                 background-color: #f8f9fa;
+            }
+
+            .form-header {
+                margin-bottom: 3rem;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 2px solid #ccc;
             }
 
         </style>
@@ -27,14 +51,14 @@
         <br>
         <div class="container mt-5">
             <div class="card p-4 shadow-sm">
-                <form id="formCliente1">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
+                <form id="formCliente">
+                <div class="form-header">
+                    <div class="title">
                         <h3>Clientes - ALTERAR</h3>
                     </div>
                     <div class="d-flex">
                         <div class="form-group col-auto">
-                            <button type="button" class="btn btn-danger">Fechar</a>
+                            <button type="button" id="btnFechar" class="btn btn-danger">Fechar</button>
                         </div>
                         <div class="form-group col-auto">
                             <button type="submit" class="btn btn-success">Alterar</button>
@@ -46,7 +70,7 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-2">
-                            <label for="codigo">Codigo <span style="color: red;">*</span></label>
+                            <label for="codigo">Código <span style="color: red;">*</span></label>
                             <input type="text" class="form-control" id="codigo" maxlength="6" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-1">
@@ -54,7 +78,7 @@
                             <input type="text" class="form-control" id="loja" maxlength="2" autocomplete="off" disabled>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="razao">Razão <span style="color: red;">*</span></label>
+                            <label for="razao">Razão Social <span style="color: red;">*</span></label>
                             <input type="text" class="form-control" id="razao" maxlength="40" autocomplete="off" required>
                         </div>
                         <div class="form-group col-md-3">
@@ -74,7 +98,7 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label for="finalidade">Finalidade <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="finalidade" maxlength="40" autocomplete="off" required>
+                            <input type="text" class="form-control" id="finalidade" maxlength="15" autocomplete="off" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="cnpj">CNPJ</label>
@@ -87,7 +111,7 @@
                     </div>
                     <div class="form-row"> 
                         <div class="form-group col-md-1">
-                            <label for="pais">Pais</label>
+                            <label for="pais">País</label>
                             <input type="text" class="form-control" id="pais" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
                         </div>
                         <div class="form-group col-md-2">
@@ -125,17 +149,17 @@
                             </datalist>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="codmunicipio">Cod Municipio</label>
+                            <label for="codmunicipio">Cód. Município</label>
                             <input type="text" class="form-control" id="codmunicipio" maxlength="7" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="cidade">Cidade <span style="color: red;">*</span></label>
+                            <label for="cidade">Município <span style="color: red;">*</span></label>
                             <input type="text" class="form-control" id="cidade" maxlength="40" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-5">
-                            <label for="endereco">Endereco <span style="color: red;">*</span></label>
+                            <label for="endereco">Endereço <span style="color: red;">*</span></label>
                             <input type="text" class="form-control" id="endereco" maxlength="40" autocomplete="off" required>
                         </div>
                         <div class="form-group col-md-4">
@@ -193,7 +217,6 @@
         </div>
         </div>
         
-        <!--
         <div class="modal" id="confirmarFecharModal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -207,18 +230,17 @@
                     <p>Você pode perder as alterações. O que deseja fazer?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Continuar editando</button>
-                    <button type="button" class="btn btn-secondary" id="confirmarSalvarBtn">Salvar e sair</button>
-                    <button type="button" class="btn btn-danger" id="confirmarFecharBtn">Sair da página</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmarFecharBtn">Sair da página</button>
                 </div>
                 </div>
             </div>
-            </div>
-        -->
+        </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="/js/alterar.js"></script>
+        <script src="/js/fechar.js"></script>
     </body>
 </html>
