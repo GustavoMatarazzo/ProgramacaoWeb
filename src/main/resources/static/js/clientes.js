@@ -30,7 +30,7 @@
             if (data.length === 0) {
                 tbody.innerHTML += `
                     <tr class="mensagem-vazia text-muted">
-                        <td colspan="21" class="text-center">Nenhum cliente cadastrado ainda.</td>
+                        <td colspan="21" class="text-left">Nenhum cliente cadastrado ainda.</td>
                     </tr>
                 `;
                 return;
@@ -47,16 +47,16 @@
                     <td>${cliente.nomefantasia}</td>
                     <td>${cliente.finalidade}</td>
                     <td>${cliente.cnpj}</td>
+                    <td>${cliente.abertura}</td>
                     <td>${cliente.cep}</td>
-                    <td>${cliente.pais}</td>
-                    <td>${cliente.estado}</td>
-                    <td>${cliente.codmunicipio}</td>
-                    <td>${cliente.cidade}</td>
                     <td>${cliente.endereco}</td>
                     <td>${cliente.bairro}</td>
+                    <td>${cliente.cidade}</td>
+                    <td>${cliente.estado}</td>
+                    <td>${cliente.codmunicipio}</td>
+                    <td>${cliente.pais}</td>
                     <td>${cliente.ddd}</td>
                     <td>${cliente.telefone}</td>
-                    <td>${cliente.abertura}</td>
                     <td>${cliente.contato}</td>
                     <td>${cliente.email}</td>
                     <td>${cliente.homepage}</td>
@@ -140,9 +140,7 @@
     });
 
     // Atualizar Cliente
-    document
-    .getElementById("alterarSelecionado")
-    .addEventListener("click", function () {
+    document.getElementById("alterarSelecionado").addEventListener("click", function () {
         if (!clienteSelecionado) {
             alert("Nenhum cliente selecionado.");
             return;
@@ -174,16 +172,16 @@
             document.getElementById('nomefantasia').value = cliente.nomefantasia;
             document.getElementById('finalidade').value = cliente.finalidade;
             document.getElementById('cnpj').value = cliente.cnpj;
+            document.getElementById('abertura').value = cliente.abertura;
             document.getElementById('cep').value = cliente.cep;
-            document.getElementById('pais').value = cliente.pais;
-            document.getElementById('estado').value = cliente.estado;
-            document.getElementById('codmunicipio').value = cliente.codmunicipio;
-            document.getElementById('cidade').value = cliente.cidade;
             document.getElementById('endereco').value = cliente.endereco;
             document.getElementById('bairro').value = cliente.bairro;
+            document.getElementById('cidade').value = cliente.cidade;
+            document.getElementById('estado').value = cliente.estado;
+            document.getElementById('codmunicipio').value = cliente.codmunicipio;
+            document.getElementById('pais').value = cliente.pais;
             document.getElementById('ddd').value = cliente.ddd;
             document.getElementById('telefone').value = cliente.telefone;
-            document.getElementById('abertura').value = cliente.abertura;
             document.getElementById('contato').value = cliente.contato;
             document.getElementById('email').value = cliente.email;
             document.getElementById('homepage').value = cliente.homepage;

@@ -1,6 +1,5 @@
 package com.projeto.maicosoft.domain.cliente;
 import com.projeto.maicosoft.entities.Cliente;
-import com.projeto.maicosoft.exception.DuplicadoException;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +21,17 @@ public class ClienteService {
     }
 
     public Cliente criarCliente(Cliente cliente){
-        if (clienteRepository.existsById(cliente.getCodigo())) {
-            throw new DuplicadoException("Cliente com código '" + cliente.getCodigo() + "' já existe.");
+        String ultimoCodigo = clienteRepository.findUltimoCodigo();
+        String proximoCodigo;
+        if (ultimoCodigo == null) {
+            proximoCodigo = "C00001";
+        } else {
+            int numero = Integer.parseInt(ultimoCodigo.substring(1));
+            numero++;
+            proximoCodigo = String.format("C%05d", numero);
         }
+        cliente.setCodigo(proximoCodigo);
+
         Cliente clienteSalvo = clienteRepository.save(cliente);
         String destinatario = "fiscal1maicosoft@hotmail.com";
         String assunto = "Novo cliente cadastrado: " + clienteSalvo.getCodigo();

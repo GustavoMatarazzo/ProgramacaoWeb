@@ -29,16 +29,16 @@
             document.getElementById('nomefantasia').value = cliente.nomefantasia;
             document.getElementById('finalidade').value = cliente.finalidade;
             document.getElementById('cnpj').value = cliente.cnpj;
+            document.getElementById('abertura').value = cliente.abertura;
             document.getElementById('cep').value = cliente.cep;
-            document.getElementById('pais').value = cliente.pais;
-            document.getElementById('estado').value = cliente.estado;
-            document.getElementById('codmunicipio').value = cliente.codmunicipio;
-            document.getElementById('cidade').value = cliente.cidade;
             document.getElementById('endereco').value = cliente.endereco;
             document.getElementById('bairro').value = cliente.bairro;
+            document.getElementById('cidade').value = cliente.cidade;
+            document.getElementById('estado').value = cliente.estado;
+            document.getElementById('codmunicipio').value = cliente.codmunicipio;
+            document.getElementById('pais').value = cliente.pais;
             document.getElementById('ddd').value = cliente.ddd;
             document.getElementById('telefone').value = cliente.telefone;
-            document.getElementById('abertura').value = cliente.abertura;
             document.getElementById('contato').value = cliente.contato;
             document.getElementById('email').value = cliente.email;
             document.getElementById('homepage').value = cliente.homepage;
@@ -68,16 +68,16 @@
             nomefantasia: document.getElementById('nomefantasia').value,
             finalidade: document.getElementById('finalidade').value,
             cnpj: document.getElementById('cnpj').value,
+            abertura: document.getElementById('abertura').value,
             cep: document.getElementById('cep').value,
-            pais: document.getElementById('pais').value,
-            estado: document.getElementById('estado').value,
-            codmunicipio: document.getElementById('codmunicipio').value,
-            cidade: document.getElementById('cidade').value,
             endereco: document.getElementById('endereco').value,
             bairro: document.getElementById('bairro').value,
+            cidade: document.getElementById('cidade').value,
+            estado: document.getElementById('estado').value,
+            codmunicipio: document.getElementById('codmunicipio').value,
+            pais: document.getElementById('pais').value,
             ddd: document.getElementById('ddd').value,
             telefone: document.getElementById('telefone').value,
-            abertura: document.getElementById('abertura').value,
             contato: document.getElementById('contato').value,
             email: document.getElementById('email').value,
             homepage: document.getElementById('homepage').value
