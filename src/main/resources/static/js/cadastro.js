@@ -1,5 +1,4 @@
-    // Criar Cliente
-    const apiUrl = 'http://localhost:8080/api/clientes';
+const apiUrl = 'http://localhost:8080/api/clientes';
     const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -7,6 +6,7 @@
 
     let clienteTemp = null;
 
+    // Criar Cliente
     document.getElementById('formCliente').addEventListener('submit', function (event) {
         event.preventDefault();
 

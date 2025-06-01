@@ -22,47 +22,8 @@
         <meta name="theme-color" content="#ffffff">
         <title>Alterar cliente - MaicoSoft</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/alterar.css">
         <style>
-            body {
-                background-color: #f8f9fa;
-                font-family: sans-serif;
-                font-size: 14px;
-            }
-
-            h2 {
-                font-family: Arial;
-                font-weight: bold;
-            }
-
-            .form-header {
-                margin-bottom: 3rem;
-                display: flex;
-                justify-content: space-between;
-                border-bottom: 2px solid #ccc;
-            }
-
-            label {
-                font-size: 0.90rem;
-                white-space: nowrap;
-            }
-
-            .input-field {
-                display: flex;
-                align-items: center;
-                background-color: #ffff;
-                border-radius: 8px;
-                box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-            }
-
-            .form-control {
-                height: 36px;
-                font-size: 14px;
-            }
-
-            .row {
-                display: flex;
-                justify-content: center;
-            }
 
         </style>
         <script src="/js/token.js"></script>
@@ -155,7 +116,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="abertura">Abertura</label>
+                            <label for="abertura">Data de Abertura</label>
                             <div class="input-field">
                                 <input type="date" class="form-control" id="abertura" maxlength="40">
                             </div>
@@ -264,7 +225,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-5">
-                            <label for="email">Email</label>
+                            <label for="email">E-mail</label>
                             <div class="input-field">
                                 <input type="email" class="form-control" id="email" maxlength="50" autocomplete="off">
                             </div>
@@ -321,27 +282,8 @@
             </div>
         </div>
 
-        <script>
-            function mascaraCNPJ(v){
-                v=v.replace(/\D/g,"").slice(0,14);                        
-                v=v.replace(/^(\d{2})(\d)/,"$1.$2");         
-                v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3");
-                v=v.replace(/\.(\d{3})(\d)/,".$1/$2");      
-                v=v.replace(/(\d{4})(\d)/,"$1-$2");     
-                return v
-            }
-
-            function mascaraCEP(v) {
-                v = v.replace(/\D/g, "").slice(0,8);
-                v = v.replace(/^(\d{5})(\d)/, "$1-$2");
-                return v;
-            }
-
-            function mascaraTelefone(v) {
-                v = v.replace(/\D/g, "").slice(0,8);
-                v = v.replace(/(\d{4})(\d)/, "$1-$2");
-                return v;
-            }
+        <script src="/js/mascara.js">
+            
         </script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

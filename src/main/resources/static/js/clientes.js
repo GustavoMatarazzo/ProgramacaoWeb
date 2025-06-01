@@ -89,6 +89,7 @@
                     excluirBtn.disabled = false;
                     alterarBtn.disabled = false;
                     visualizarBtn.disabled = false;
+                    
                 } else {
                     clienteSelecionado = null;
                     excluirBtn.disabled = true;
