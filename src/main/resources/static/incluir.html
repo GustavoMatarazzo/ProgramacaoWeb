@@ -66,14 +66,13 @@
                     <div class="form-group col-md-1">
                         <label for="loja">Loja <span style="color: red;">*</span></label>
                         <div class="input-field">
-                            <input type="text" class="form-control" id="loja" maxlength="2" autocomplete="off" required>
+                            <input type="text" class="form-control" id="loja" maxlength="2" autocomplete="off" pattern="^(?!\s*$).*" required>
                         </div>
                     </div>
                     <div class="form-group col-md-5">
                         <label for="razao">Razão Social <span style="color: red;">*</span></label>
                         <div class="input-field">
-                            <input type="text" class="form-control" id="razao" maxlength="40" autocomplete="off"
-                                required>
+                            <input type="text" class="form-control" id="razao" maxlength="40" autocomplete="off" pattern="^(?!\s*$).*" required>
                         </div>
                     </div>
                     <div class="form-group col-md-5">
@@ -112,8 +111,8 @@
                     <div class="form-group col-md-3">
                         <label for="cnpj">CNPJ</label>
                         <div class="input-field">
-                            <input type="text" class="form-control" id="cnpj" maxlength="18"
-                                oninput="this.value = mascaraCNPJ(this.value)" autocomplete="off">
+                            <input type="text" class="form-control" id="cnpj" maxlength="18" onblur="checkCnpj(this.value)"
+                                oninput="this.value = mascaraCNPJ(this.value); adicionarPatternCNPJ(this);" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group col-md-2">
@@ -129,15 +128,14 @@
                         <label for="cep">CEP</label>
                         <div class="input-field">
                             <input type="text" class="form-control" id="cep" maxlength="9"
-                                oninput="this.value = this.value = mascaraCEP(this.value)" onblur="pesquisacep(this.value);"
+                                oninput="this.value = this.value = mascaraCEP(this.value); adicionarPatternCEP(this)" onblur="pesquisacep(this.value);"
                                 autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group col-md-5">
                         <label for="endereco">Endereço <span style="color: red;">*</span></label>
                         <div class="input-field">
-                            <input type="text" class="form-control" id="endereco" maxlength="60" autocomplete="off"
-                                required>
+                            <input type="text" class="form-control" id="endereco" maxlength="60" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -197,14 +195,14 @@
                         <label for="codmunicipio">Cód. Município </label>
                         <div class="input-field">
                             <input type="text" class="form-control" id="codmunicipio" maxlength="7"
-                                oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                                oninput="this.value = this.value.replace(/\D/g, ''); adicionarPatternCodMunicipio(this)" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="pais">País</label>
                         <div class="input-field">
                             <input type="text" class="form-control" id="pais" maxlength="3"
-                                oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                                oninput="this.value = this.value.replace(/\D/g, ''); adicionarPatternPais(this)" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -214,14 +212,14 @@
                         <label for="ddd">DDD</label>
                         <div class="input-field">
                             <input type="text" class="form-control" id="ddd" maxlength="3"
-                                oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                                oninput="this.value = this.value.replace(/\D/g, ''); adicionarPatternDDD(this)" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="telefone">Telefone</label>
                         <div class="input-field">
                             <input type="text" class="form-control" id="telefone" maxlength="9"
-                                oninput="this.value = mascaraTelefone(this.value)" autocomplete="off">
+                                oninput="this.value = mascaraTelefone(this.value); adicionarPatternTelefone(this)" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group col-md-8">
@@ -291,6 +289,27 @@
         </div>
     </div>
 
+    <script>
+       function checkCnpj(cnpj){
+        $.ajax({
+            'url': 'https://www.receitaws.com.br/v1/cnpj/' + cnpj.replace(/[^0-9]/g, ''),
+            'type': "GET",
+            'dataType': 'jsonp',
+            'success': function(data){
+                if(data.nome == undefined){
+                    alert(data.status + ' ' + data.message)
+                }else{
+                    document.getElementById('razao').value = data.nome;
+                    document.getElementById('nomefantasia').value = data.fantasia;
+                    document.getElementById('cidade').value = data.municipio;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('estado').value = data.uf;
+                    document.getElementById('email').value = data.email;
+                }
+            }
+        })
+       }
+    </script>
     <script src="/js/mascara.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

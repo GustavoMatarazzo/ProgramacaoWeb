@@ -112,7 +112,7 @@
                         <div class="form-group col-md-2">
                             <label for="cnpj">CNPJ</label>
                             <div class="input-field">
-                                <input type="text" class="form-control" id="cnpj" maxlength="18" oninput="this.value = mascaraCNPJ(this.value)" autocomplete="off">
+                                <input type="text" class="form-control" id="cnpj" maxlength="18" oninput="this.value = mascaraCNPJ(this.value); adicionarPatternCNPJ(this)" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group col-md-2">
@@ -128,7 +128,7 @@
                             <label for="cep">CEP</label>
                             <div class="input-field">
                                 <input type="text" class="form-control" id="cep" maxlength="9"
-                                    oninput="this.value = this.value = mascaraCEP(this.value)" onblur="pesquisacep(this.value);" autocomplete="off">
+                                    oninput="this.value = this.value = mascaraCEP(this.value); adicionarPatternCEP(this)" onblur="pesquisacep(this.value);" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group col-md-5">
@@ -191,13 +191,13 @@
                         <div class="form-group col-md-2">
                             <label for="codmunicipio">Cód. Município </label>
                             <div class="input-field">
-                                <input type="text" class="form-control" id="codmunicipio" maxlength="7" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                                <input type="text" class="form-control" id="codmunicipio" maxlength="7" oninput="this.value = this.value.replace(/\D/g, ''); adicionarPatternCodMunicipio(this)" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="pais">País</label>
                             <div class="input-field">
-                                <input type="text" class="form-control" id="pais" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                                <input type="text" class="form-control" id="pais" maxlength="3" oninput="this.value = this.value.replace(/\D/g, ''); adicionarPatternPais(this)" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -206,13 +206,13 @@
                         <div class="form-group col-md-1">
                             <label for="ddd">DDD</label>
                             <div class="input-field">
-                                <input type="text" class="form-control" id="ddd" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" autocomplete="off">
+                                <input type="text" class="form-control" id="ddd" maxlength="3" oninput="this.value = this.value.replace(/\D/g, ''); adicionarPatternDDD(this)" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="telefone">Telefone</label>
                             <div class="input-field">
-                                <input type="text" class="form-control" id="telefone" maxlength="9" oninput="this.value = mascaraTelefone(this.value)" autocomplete="off">
+                                <input type="text" class="form-control" id="telefone" maxlength="9" oninput="this.value = mascaraTelefone(this.value); adicionarPatternTelefone(this)" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group col-md-8">
