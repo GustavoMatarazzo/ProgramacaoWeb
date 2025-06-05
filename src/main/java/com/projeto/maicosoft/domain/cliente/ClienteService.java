@@ -21,6 +21,10 @@ public class ClienteService {
     }
 
     public Cliente criarCliente(Cliente cliente){
+        if (clienteRepository.findByCnpj(cliente.getCnpj()).isPresent()) {
+        throw new IllegalArgumentException("CNPJ já cadastrado.");
+    }
+
         String ultimoCodigo = clienteRepository.findUltimoCodigo();
         String proximoCodigo;
         if (ultimoCodigo == null) {
@@ -43,6 +47,11 @@ public class ClienteService {
     }
 
     public boolean atualizarCliente(String codigo, Cliente clienteAtualizado){
+        Optional<Cliente> clienteExistente = clienteRepository.findByCnpj(clienteAtualizado.getCnpj());
+        if (clienteExistente.isPresent() && !clienteExistente.get().getCodigo().equals(codigo)) {
+            throw new IllegalArgumentException("CNPJ já cadastrado.");
+        }
+
         Optional<Cliente> clienteOptional = buscarClientePorCodigo(codigo);
         if(clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
