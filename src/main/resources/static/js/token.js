@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (desconectarBtn) {
         desconectarBtn.addEventListener('click', () => {
             localStorage.removeItem('jwt');
-            alert('Você foi desconectado.');
             window.location.href = 'login.html';
         });
     }
