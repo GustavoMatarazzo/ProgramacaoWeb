@@ -25,7 +25,7 @@ public class Cliente {
     @Column(nullable = false, length = 100)
     private String finalidade;
 
-    @Column(nullable = true, length = 100, unique = true)
+    @Column(nullable = false, length = 100, unique = true)
     private String cnpj;
 
     @Column(nullable = true, length = 100)
@@ -255,4 +255,3 @@ public class Cliente {
     }
 
 }
-
